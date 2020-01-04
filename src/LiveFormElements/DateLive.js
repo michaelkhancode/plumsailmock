@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-export default function MaterialUIPickers() {
+export default function DateLive({ props }) {
     const [selectedDate, setSelectedDate] = React.useState();
     const classes = useStyles();
 
@@ -43,21 +43,26 @@ export default function MaterialUIPickers() {
                 <div className={classes.flexWrapper} >
                     <div className={classes.numbering}>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            {`${4}.`}
+                          {`${props.order}.`}
                         </Typography>
                     </div>
                     <div>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            Please Enter Your date of birth
+                          {`${props.mainQuestion}`}
                         </Typography>
+
+                        { props.subQuestion.active &&
                         <Typography align="left" className={classes.subtitle} color="textPrimary">
-                            mm/dd/yyyy
+                            {`${props.subQuestion.question}`}
                         </Typography>
+                        }
 
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
+                            style={{marginTop:"15px"}}
                             id="date-picker-dialog"
                             format="MM/dd/yyyy"
+                            label="mm/dd/yyyy"
                             value={selectedDate}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{

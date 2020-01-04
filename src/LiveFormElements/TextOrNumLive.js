@@ -32,13 +32,21 @@ const useStyles = makeStyles(theme => ({
 //                        Text or Numeric switch
 //                        Numiric, with restrictions >=, <= etc..
 
-export default function TextOrNumLive() {
+var isNumberReg = /^\d+$/;
+
+export default function TextOrNumLive({props}) {
   const classes = useStyles();
   const [value, setValue] = React.useState();
 
   const handleChange = event => {
-    console.log(event.target.value)
-    setValue(event.target.value);
+    if ( props.isText ){
+      setValue(event.target.value);
+    } 
+    else {
+      if (isNumberReg.test(event.target.value)){
+        setValue(event.target.value)
+      }
+    }
   };
 
   return (
@@ -48,20 +56,24 @@ export default function TextOrNumLive() {
                 <div className={classes.flexWrapper} >
                     <div className={classes.numbering}>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            {`${2}.`}
+                          {`${props.order}.`}
                         </Typography>
                     </div>
                     <div>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            What is First Name 
+                          {`${props.mainQuestion}`}
                         </Typography>
+
+                        { props.subQuestion.active &&
                         <Typography align="left" className={classes.subtitle} color="textPrimary">
-                            Government first name
+                            {`${props.subQuestion.question}`}
                         </Typography>
+                        }
+
                         <form className={classes.root} noValidate autoComplete="off">
                             <TextField
                             id="standard-multiline-flexible"
-                            label="Under 150 Words"
+                            label={props.restrictions}
                             multiline
                             rowsMax= "4"
                             value={value}

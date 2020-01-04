@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 //   Rating           ->  5 star default with option for 2 too 10, start symbol
 
-export default function RatingLive() {
+export default function RatingLive({props}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(2);
 
@@ -36,19 +36,23 @@ export default function RatingLive() {
                 <div className={classes.flexWrapper} >
                     <div className={classes.numbering}>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            {`${3}.`}
+                          {`${props.order}.`}
                         </Typography>
                     </div>
                     <div>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            How would you rate your experience
+                          {`${props.mainQuestion}`}
                         </Typography>
+
+                        { props.subQuestion.active &&
                         <Typography align="left" className={classes.subtitle} color="textPrimary">
-                            Dont be afraid to be honest !
+                            {`${props.subQuestion.question}`}
                         </Typography>
-                        <Box component="fieldset" mb={3} borderColor="transparent">
+                        }
+
+                        <Box component="fieldset"  borderColor="transparent">
                             <Rating
-                            max={10}
+                            max={props.numStars}
                             name="simple-controlled"
                             value={value}
                             onChange={(event, newValue) => {
