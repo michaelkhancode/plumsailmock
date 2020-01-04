@@ -28,17 +28,23 @@ const useStyles = makeStyles({
 //   Radio Button     ->  Question, minimum 2 radios
 //                        Add more radios, swich to check all apply
 
-export default function RadioLive() {
-  const classes = useStyles();
+export default function RadioLive({ props }) {
+    console.log(props)
+    const classes = useStyles();
 
-  //Radio Type state variables--------------
-  const [value, setValue] = React.useState('female');
-  //Radio Button state--------------
+    //Radio Type state variables--------------
+    const [value, setValue] = React.useState("");
+    //Radio Button state--------------
 
-  const handleChange = event => {
+    const handleChange = event => {
     console.log(event.target)
     setValue(event.target.value);
-  };
+    };
+
+    const radiosToRender = [];
+    props.radios.forEach((label, i) => {
+        radiosToRender.push(<FormControlLabel value={label} control={<Radio size="small" />} label={label} key={i} />)    
+    });
 
   return (
     <div>
@@ -47,38 +53,28 @@ export default function RadioLive() {
                 <div className={classes.flexWrapper} >
                     <div className={classes.numbering}>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            {`${1}.`}
+                            {`${props.order}.`}
                         </Typography>
                     </div>
                     <div>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">
-                            What is your Gender
+                            {`${props.mainQuestion}`}
                         </Typography>
+
+                        { props.subQuestion.active &&
                         <Typography align="left" className={classes.subtitle} color="textPrimary">
-                            As per birth certificate
+                            {`${props.subQuestion.question}`}
                         </Typography>
+                        }
 
                         <FormControl className={classes.formControl}>
                             <RadioGroup 
-                                aria-label="gender" 
-                                name="gender1" 
+                                aria-label={String(props.id)}
+                                name= {String(props.id)}
                                 value={value} 
                                 onChange={handleChange}
                             >
-                                <FormControlLabel 
-                                    // submission info
-                                    value="female" 
-                                    // Radio button
-                                    control={<Radio size="small" />}
-                                    // What shows
-                                    label="Female"
-                                    style={{}}
-                                />
-                                <FormControlLabel
-                                    value="male" 
-                                    control={<Radio size="small" />} 
-                                    label="Male" 
-                                />
+                                {radiosToRender}
                             </RadioGroup>
                         </FormControl>
                     </div>
