@@ -17,9 +17,6 @@ const useStyles = makeStyles({
     fontSize: 14,
     fontStyle: "italic",
   },
-  pos: {
-    marginBottom: 12,
-  },
   flexWrapper: {
       display:"flex",
   },
@@ -33,7 +30,10 @@ const useStyles = makeStyles({
 
 export default function RadioLive() {
   const classes = useStyles();
+
+  //Radio Type state variables--------------
   const [value, setValue] = React.useState('female');
+  //Radio Button state--------------
 
   const handleChange = event => {
     console.log(event.target)
@@ -44,7 +44,6 @@ export default function RadioLive() {
     <div>
         <Card className={classes.card}>
             <CardContent>
-
                 <div className={classes.flexWrapper} >
                     <div className={classes.numbering}>
                         <Typography align="left" className={classes.maintitle} color="textPrimary">

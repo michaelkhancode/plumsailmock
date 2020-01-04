@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioLive from './LiveFormElements/RadioLive';
+import TextOrNumLive  from './LiveFormElements/TextOrNumLive';
+import RatingLive  from './LiveFormElements/RatingLive';
+import DateLive  from './LiveFormElements/DateLive';
 
 
 // Form Elements:
@@ -33,6 +36,11 @@ export default function SimpleCard() {
     <div className={classes.wrapSurvey} >
       < RadioLive />
       <br/>
+      < TextOrNumLive />
+      <br/>
+      < RatingLive /> 
+      <br/>
+      < DateLive />
       
     </div>
   );
